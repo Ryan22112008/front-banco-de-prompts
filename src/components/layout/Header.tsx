@@ -1,16 +1,24 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { BrainCircuit, Menu, Search, X } from 'lucide-react'
 
 const navigation = [
   { label: 'Início', to: '/' },
-  { label: 'Prompts', to: '/prompts' },
-  { label: 'Categorias', to: '/categorias' },
+  { label: 'Prompts', to: '/#catalogo' },
+  { label: 'Categorias', to: '/#categorias' },
   { label: 'Sobre', to: '/sobre' },
 ]
 
+function isNavigationActive(to: string, pathname: string, hash: string) {
+  if (to === '/') return pathname === '/' && !hash
+  if (to === '/#catalogo') return pathname === '/' && hash === '#catalogo'
+  if (to === '/#categorias') return pathname === '/' && hash === '#categorias'
+  return false
+}
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
 
   return (
     <header className="site-header">
@@ -24,14 +32,14 @@ export function Header() {
         </button>
         <nav className={`main-nav${menuOpen ? ' is-open' : ''}`} aria-label="Navegação principal">
           {navigation.map((item) => (
-            <NavLink key={item.label} to={item.to} end={item.to === '/'} onClick={() => setMenuOpen(false)} className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+            <Link key={item.label} to={item.to} onClick={() => setMenuOpen(false)} className={`nav-link${isNavigationActive(item.to, location.pathname, location.hash) ? ' active' : ''}`}>
               {item.label}
-            </NavLink>
+            </Link>
           ))}
         </nav>
-        <a className="header-search" href="#busca" aria-label="Pesquisar prompts">
+        <Link className="header-search" to="/#busca" aria-label="Pesquisar prompts">
           <Search size={19} strokeWidth={1.8} />
-        </a>
+        </Link>
       </div>
     </header>
   )
