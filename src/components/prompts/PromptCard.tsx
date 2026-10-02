@@ -1,65 +1,54 @@
-import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, ChevronDown, Clipboard, FileDown, FileSpreadsheet, FileText, Link2 } from 'lucide-react'
+import { ArrowRight, Check, ChevronDown, Clipboard, X } from 'lucide-react'
 import type { InstructionFormat, PromptItem } from './types'
-
-const formats: { id: InstructionFormat; label: string; Icon: typeof FileText }[] = [
-  { id: 'excel', label: 'Excel', Icon: FileSpreadsheet },
-  { id: 'word', label: 'Word', Icon: FileText },
-  { id: 'pdf', label: 'PDF', Icon: FileDown },
-  { id: 'link', label: 'Link', Icon: Link2 },
-]
-
-function HighlightedInstruction({ text }: { text: string }) {
-  const chunks = text.split(/(\[[^\]]+\])/g)
-
-  return <>{chunks.map((chunk, index) => chunk.startsWith('[') && chunk.endsWith(']')
-    ? <mark className="instruction-placeholder" key={`${index}-${chunk}`}>{chunk}</mark>
-    : <span key={`${index}-${chunk}`}>{chunk}</span>)}</>
-}
+import { instructionFormats } from './formats'
+import { InstructionText } from './InstructionText'
 
 export function PromptCard({ prompt, initialExpanded = false, showDetailsLink = true }: { prompt: PromptItem; initialExpanded?: boolean; showDetailsLink?: boolean }) {
   const [isOpen, setIsOpen] = useState(initialExpanded)
-  const [activeFormat, setActiveFormat] = useState<InstructionFormat>('excel')
+  const [selectedFormat, setSelectedFormat] = useState<InstructionFormat | null>(null)
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle')
-  const tabRefs = useRef<Partial<Record<InstructionFormat, HTMLButtonElement | null>>>({})
+  const dialogRef = useRef<HTMLDialogElement>(null)
   const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
-  const generatedId = useId().replace(/[^a-zA-Z0-9_-]/g, '')
-  const cardId = `${prompt.id}-${generatedId}`
+  const cardId = `${prompt.id}-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
   const triggerId = `${cardId}-instructions-trigger`
   const Icon = prompt.icon
+  const activeFormat = instructionFormats.find(({ id }) => id === selectedFormat)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+
+    if (selectedFormat) {
+      if (!dialog.open) dialog.showModal()
+      const previousOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      return () => { document.body.style.overflow = previousOverflow }
+    }
+
+    if (dialog.open) dialog.close()
+  }, [selectedFormat])
 
   useEffect(() => () => {
     if (copyTimer.current) clearTimeout(copyTimer.current)
   }, [])
 
-  const selectTab = (format: InstructionFormat, focus = false) => {
-    setActiveFormat(format)
-    setCopyState('idle')
-    if (focus) tabRefs.current[format]?.focus()
-  }
-
-  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    const currentIndex = formats.findIndex((format) => format.id === activeFormat)
-    let nextIndex: number | undefined
-    if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % formats.length
-    if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + formats.length) % formats.length
-    if (event.key === 'Home') nextIndex = 0
-    if (event.key === 'End') nextIndex = formats.length - 1
-    if (nextIndex === undefined) return
-    event.preventDefault()
-    selectTab(formats[nextIndex].id, true)
-  }
-
   const copyInstruction = async () => {
+    if (!selectedFormat) return
     try {
-      await navigator.clipboard.writeText(prompt.instructions[activeFormat])
+      await navigator.clipboard.writeText(prompt.instructions[selectedFormat])
       setCopyState('copied')
     } catch {
       setCopyState('error')
     }
     if (copyTimer.current) clearTimeout(copyTimer.current)
     copyTimer.current = setTimeout(() => setCopyState('idle'), 2000)
+  }
+
+  const closeDialog = () => {
+    if (dialogRef.current?.open) dialogRef.current.close()
+    else setSelectedFormat(null)
   }
 
   return (
@@ -83,59 +72,75 @@ export function PromptCard({ prompt, initialExpanded = false, showDetailsLink = 
           type="button"
           id={triggerId}
           aria-expanded={isOpen}
-          aria-controls={`${cardId}-instruction-panels`}
+          aria-controls={`${cardId}-format-options`}
           onClick={() => setIsOpen((open) => !open)}
         >
           <span>Ver instruções</span>
           <ChevronDown size={17} aria-hidden="true" />
         </button>
-        <div className="instruction-expansion" id={`${cardId}-instruction-panels`} aria-hidden={!isOpen} inert={!isOpen}>
-          <div className="instruction-expansion-inner">
-            <div className="instruction-tabs" role="tablist" aria-label={`Formatos de instrução para ${prompt.title}`}>
-              {formats.map(({ id, label, Icon: FormatIcon }) => (
-                <button
-                  className={`instruction-tab format-${id}${activeFormat === id ? ' is-active' : ''}`}
-                  type="button"
-                  role="tab"
-                  id={`${cardId}-tab-${id}`}
-                  aria-selected={activeFormat === id}
-                  aria-controls={`${cardId}-panel-${id}`}
-                  tabIndex={activeFormat === id ? 0 : -1}
-                  key={id}
-                  ref={(element) => { tabRefs.current[id] = element }}
-                  onClick={() => selectTab(id)}
-                  onKeyDown={handleTabKeyDown}
-                >
-                  <FormatIcon size={15} aria-hidden="true" />{label}
-                </button>
-              ))}
-            </div>
-            {formats.map(({ id, label }) => (
-              <section
-                className="instruction-panel"
-                role="tabpanel"
-                id={`${cardId}-panel-${id}`}
-                aria-labelledby={`${cardId}-tab-${id}`}
-                aria-label={`Instrução ${label}`}
-                hidden={activeFormat !== id}
+        <div
+          className="format-options-expansion"
+          id={`${cardId}-format-options`}
+          role="group"
+          aria-label={`Escolher formato das instruções para ${prompt.title}`}
+          aria-hidden={!isOpen}
+          inert={!isOpen}
+        >
+          <div className="format-options-inner">
+            {instructionFormats.map(({ id, label, Icon: FormatIcon }) => (
+              <button
+                className={`format-option format-${id}`}
+                type="button"
+                onClick={() => { setCopyState('idle'); setSelectedFormat(id) }}
                 key={id}
-                tabIndex={0}
               >
-                <p className="instruction-text"><HighlightedInstruction text={prompt.instructions[id]} /></p>
-                <div className="instruction-actions">
-                  <span className="copy-feedback" role="status" aria-live="polite">
-                    {copyState === 'copied' ? 'Instrução copiada.' : copyState === 'error' ? 'Não foi possível copiar.' : ''}
-                  </span>
-                  <button className={`copy-button${copyState === 'copied' ? ' is-copied' : ''}`} type="button" onClick={copyInstruction}>
-                    {copyState === 'copied' ? <Check size={15} /> : <Clipboard size={15} />}
-                    {copyState === 'copied' ? 'Copiado!' : copyState === 'error' ? 'Tentar novamente' : 'Copiar'}
-                  </button>
-                </div>
-              </section>
+                <FormatIcon size={15} aria-hidden="true" />
+                <span>{label}</span>
+              </button>
             ))}
           </div>
         </div>
       </div>
+      <dialog
+        ref={dialogRef}
+        className="instruction-dialog"
+        aria-label={activeFormat ? `Instrução ${activeFormat.label} para ${prompt.title}` : undefined}
+        aria-describedby={`${cardId}-instruction-copy`}
+        onClose={() => { setSelectedFormat(null); setCopyState('idle') }}
+        onClick={(event) => {
+          const bounds = event.currentTarget.getBoundingClientRect()
+          const clickIsInside = event.clientX >= bounds.left && event.clientX <= bounds.right
+            && event.clientY >= bounds.top && event.clientY <= bounds.bottom
+          if (!clickIsInside) closeDialog()
+        }}
+      >
+        {activeFormat && (
+          <>
+            <div className="format-detail-card-heading">
+              <div className={`format-detail-icon format-${activeFormat.id}`}><activeFormat.Icon size={20} aria-hidden="true" /></div>
+              <div>
+                <span>Instrução selecionada</span>
+                <h2>{activeFormat.label}</h2>
+              </div>
+              <button className="dialog-close" type="button" onClick={closeDialog} aria-label="Fechar instrução" autoFocus>
+                <X size={18} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="format-detail-editor" id={`${cardId}-instruction-copy`}>
+              <p><InstructionText text={prompt.instructions[activeFormat.id]} /></p>
+            </div>
+            <div className="format-detail-actions">
+              <span className={`copy-feedback${copyState === 'error' ? ' is-error' : ''}`} role="status" aria-live="polite">
+                {copyState === 'copied' ? 'Instrução copiada.' : copyState === 'error' ? 'Não foi possível copiar.' : ''}
+              </span>
+              <button className={`copy-button${copyState === 'copied' ? ' is-copied' : ''}`} type="button" onClick={copyInstruction}>
+                {copyState === 'copied' ? <Check size={15} aria-hidden="true" /> : <Clipboard size={15} aria-hidden="true" />}
+                {copyState === 'copied' ? 'Copiado!' : copyState === 'error' ? 'Tentar novamente' : 'Copiar instrução'}
+              </button>
+            </div>
+          </>
+        )}
+      </dialog>
     </article>
   )
 }

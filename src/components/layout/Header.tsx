@@ -39,6 +39,7 @@ export function Header() {
         </nav>
         <Link className="header-search" to="/#busca" aria-label="Pesquisar prompts">
           <Search size={19} strokeWidth={1.8} />
+          <span className="header-search-label">Buscar</span>
         </Link>
       </div>
     </header>
