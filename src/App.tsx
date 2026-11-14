@@ -1,6 +1,9 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import PromptDetail from './pages/PromptDetail'
+import Glossario from './pages/Glossario'
+import FichaSistemaIA from './pages/FichaSistemaIA'
+import NotFound from './pages/NotFound'
 import { Footer } from './components/layout/Footer'
 import { Header } from './components/layout/Header'
 
@@ -12,7 +15,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/prompts/:id" element={<PromptDetail />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/glossario" element={<Glossario />} />
+          <Route path="/ficha-sistema-ia" element={<FichaSistemaIA />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

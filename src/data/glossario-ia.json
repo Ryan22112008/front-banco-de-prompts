@@ -1,0 +1,391 @@
+{
+  "titulo": "Glossário de Termos Relacionados à IA",
+  "publicadoEm": "29/09/2025",
+  "atualizadoEm": "11/11/2026",
+  "termos": [
+    {
+      "id": "algoritmo",
+      "termo": "Algoritmo",
+      "letra": "A",
+      "categoria": "Conceitos de IA",
+      "definicao": "Sequência finita de instruções bem definidas e não ambíguas, executadas para obter um resultado ou solucionar um problema.",
+      "fonte": "Recomendações da UNESCO sobre Ética da IA, 2021"
+    },
+    {
+      "id": "alto-impacto-adverso-a-direitos-fundamentais",
+      "termo": "Alto Impacto Adverso a Direitos Fundamentais",
+      "letra": "A",
+      "categoria": "Classificação de risco",
+      "definicao": "Situações em que sistemas de IA podem causar violações significativas aos direitos fundamentais garantidos pela Constituição Federal, incluindo privacidade, não discriminação, devido processo legal, liberdade de expressão e dignidade humana. Caracteriza-se por consequências graves, irreversíveis ou de difícil reparação que afetem a capacidade dos indivíduos de exercerem plenamente seus direitos.",
+      "fonte": "Constituição Federal de 1988 e Recomendações da UNESCO sobre Ética da IA (2021)"
+    },
+    {
+      "id": "alto-risco",
+      "termo": "Alto Risco",
+      "letra": "A",
+      "categoria": "Classificação de risco",
+      "definicao": "Ambientes ou situações em que a aplicação de sistemas de IA pode gerar consequências graves, irreversíveis ou de difícil reparação para indivíduos ou grupos, como violação de direitos fundamentais, danos físicos, psicológicos ou financeiros significativos, ou comprometimento da segurança pública. A identificação de um contexto de alto risco no questionário de Avaliação de Riscos indica a necessidade de uma avaliação ética mais aprofundada.",
+      "fonte": "Regulamento de IA da União Europeia - AI Act"
+    },
+    {
+      "id": "alucinacao",
+      "termo": "Alucinação",
+      "letra": "A",
+      "categoria": "Conceitos de IA",
+      "definicao": "Respostas incorretas ou fictícias geradas pela IAG que, apesar de convincentes, são erradas ou enganosas, não corresponde à realidade ou aos dados de treinamento, apresentando informações fabricadas, imprecisas ou sem fundamento factual. Esse fenômeno pode ocorrer devido às limitações nos dados de treinamento ou ao processamento do modelo.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "aprendizado-de-maquina-machine-learning",
+      "termo": "Aprendizado de Máquina (Machine Learning)",
+      "letra": "A",
+      "categoria": "Conceitos de IA",
+      "definicao": "Subcampo da IA que se concentra no desenvolvimento de algoritmos e modelos estatísticos que permitem aos computadores melhorar seu desempenho em uma tarefa específica com base em experiência, sem serem explicitamente programados para isso.",
+      "fonte": "Estratégia Brasileira de Inteligência Artificial - EBIA"
+    },
+    {
+      "id": "aprendizado-profundo-deep-learning",
+      "termo": "Aprendizado Profundo (Deep Learning)",
+      "letra": "A",
+      "categoria": "Conceitos de IA",
+      "definicao": "Subcampo do aprendizado de máquina baseado em redes neurais artificiais com múltiplas camadas, capaz de aprender representações de dados com múltiplos níveis de abstração.",
+      "fonte": "Estratégia Brasileira de Inteligência Artificial - EBIA"
+    },
+    {
+      "id": "auditoria-de-iag",
+      "termo": "Auditoria de IAG",
+      "letra": "A",
+      "categoria": "Ética e governança",
+      "definicao": "Processo de revisão das decisões e resultados gerados por sistemas de IAG, garantindo conformidade com normas legais e éticas.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "aumento-de-contexto",
+      "termo": "Aumento de contexto",
+      "letra": "A",
+      "categoria": "RAG",
+      "definicao": "Etapa em que a informação recuperada da base de dados é anexada à pergunta do usuário para servir como \"cola\" verídica para a IA.",
+      "fonte": "Guia de Introdução ao RAG no Serviço Público - MGI/SGD"
+    },
+    {
+      "id": "avaliacao-de-impacto-etico-aie",
+      "termo": "Avaliação de Impacto Ético (AIE)",
+      "letra": "A",
+      "categoria": "Ética e governança",
+      "definicao": "Processo sistemático para identificar, avaliar e mitigar riscos éticos associados a sistemas de IA.",
+      "fonte": "Recomendações da UNESCO sobre Ética da IA, 2021 e UNESCO Ethical Impact Assessment, 2023"
+    },
+    {
+      "id": "baixo-risco",
+      "termo": "Baixo Risco",
+      "letra": "B",
+      "categoria": "Classificação de risco",
+      "definicao": "Projetos de IA com potencial mínimo de impacto adverso sobre direitos fundamentais, segurança ou bem-estar dos indivíduos. Caracterizam-se por aplicações internas, experimentais ou de apoio administrativo que não envolvem tomada de decisões automatizadas sobre pessoas nem processamento de dados pessoais sensíveis em larga escala.",
+      "fonte": "Regulamento de IA da União Europeia (AI Act) - Artigo 6º"
+    },
+    {
+      "id": "confidencialidade",
+      "termo": "Confidencialidade",
+      "letra": "C",
+      "categoria": "Proteção de dados",
+      "definicao": "Princípio de proteger informações sensíveis contra acessos não autorizados, crucial no uso de IAG.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "dados-anonimizados",
+      "termo": "Dados Anonimizados",
+      "letra": "D",
+      "categoria": "Proteção de dados",
+      "definicao": "Dado relativo a titular que não possa ser identificado, considerando a utilização de meios técnicos razoáveis e disponíveis na ocasião de seu tratamento.",
+      "fonte": "LEI Nº 13.709/18 - LGPD, art. 5º, III"
+    },
+    {
+      "id": "dados-pessoais",
+      "termo": "Dados Pessoais",
+      "letra": "D",
+      "categoria": "Proteção de dados",
+      "definicao": "Informação relacionada a pessoa natural identificada ou identificável, conforme definido pela LGPD.",
+      "fonte": null
+    },
+    {
+      "id": "dados-pessoais-sensiveis",
+      "termo": "Dados Pessoais Sensíveis",
+      "letra": "D",
+      "categoria": "Proteção de dados",
+      "definicao": "Dados pessoais sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dado referente à saúde ou à vida sexual, dado genético ou biométrico, quando vinculado a uma pessoa natural ou qualquer dado que necessite de proteção especial.",
+      "fonte": "LEI Nº 13.709/18 - LGPD, art. 5º, I"
+    },
+    {
+      "id": "deepfake",
+      "termo": "Deepfake",
+      "letra": "D",
+      "categoria": "Conceitos de IA",
+      "definicao": "Conteúdo audiovisual criado ou manipulado por IAG para parecer realista, como vídeos ou áudios simulando pessoas reais, usados frequentemente para fraudes ou desinformação.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "direitos-fundamentais",
+      "termo": "Direitos Fundamentais",
+      "letra": "D",
+      "categoria": "Classificação de risco",
+      "definicao": "Direitos e garantias individuais e coletivas assegurados pela Constituição Federal e tratados internacionais de direitos humanos, como liberdade de expressão, privacidade, não discriminação, devido processo legal, entre outros. No contexto da IA, refere-se à capacidade dos indivíduos de exercerem plenamente seus direitos sem interferências indevidas ou prejudiciais por sistemas automatizados.",
+      "fonte": "Constituição Federal de 1988, Título II, e Recomendações da UNESCO sobre Ética da IA, 2021"
+    },
+    {
+      "id": "diretrizes",
+      "termo": "Diretrizes",
+      "letra": "D",
+      "categoria": "Ética e governança",
+      "definicao": "As diretrizes para o uso ético de IA generativa incluem estratégias para garantir a ausência de vieses, conformidade com direitos humanos e justiça, responsabilidade pelo impacto do conteúdo gerado, proteção da privacidade e segurança das informações, transparência na geração por IA, informação sobre o uso responsável das ferramentas e relevância das soluções às necessidades do usuário e seus impactos.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "eficiencia",
+      "termo": "Eficiência",
+      "letra": "E",
+      "categoria": "Princípios da administração pública",
+      "definicao": "Um dos princípios da administração pública que orienta o uso da IAG para otimizar tarefas e melhorar processos, desde que alinhado com os demais princípios éticos e legais.",
+      "fonte": "Constituição Federal de 1988, artigo 37, e Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "explicabilidade",
+      "termo": "Explicabilidade",
+      "letra": "E",
+      "categoria": "Ética e governança",
+      "definicao": "Capacidade de um sistema de IAG de explicar claramente os critérios e processos usados para tomar decisões ou gerar resultados.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "fine-tuning",
+      "termo": "Fine-tuning",
+      "letra": "F",
+      "categoria": "Conceitos de IA",
+      "definicao": "Processo de ajuste fino de um modelo de IA pré-treinado com dados específicos para uma tarefa particular.",
+      "fonte": "Estratégia Brasileira de Inteligência Artificial (EBIA)"
+    },
+    {
+      "id": "grandes-modelos-de-linguagem",
+      "termo": "Grandes Modelos de Linguagem",
+      "letra": "G",
+      "categoria": "Conceitos de IA",
+      "definicao": "Do Inglês - Large Language Models (LLM). São redes neurais de grande escala treinadas em conjuntos massivos de dados, permitindo à IAG compreender e gerar textos, áudios e imagens.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "geracao-fundamentada",
+      "termo": "Geração fundamentada",
+      "letra": "G",
+      "categoria": "RAG",
+      "definicao": "Quando o modelo utiliza seu poder de escrita para processar dados reais encontrados, entregando uma resposta baseada em evidências atuais.",
+      "fonte": "Guia de Introdução ao RAG no Serviço Público - MGI/SGD"
+    },
+    {
+      "id": "ia-code-corporativo",
+      "termo": "IA Code Corporativo",
+      "letra": "I",
+      "categoria": "Conceitos de IA",
+      "definicao": "Soluções de IA generativas aprovadas ou em avaliação, que garantem confidencialidade e atendem às normas, como GitHub Copilot e Gemini Code Assist.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "ia-generativa",
+      "termo": "IA Generativa",
+      "letra": "I",
+      "categoria": "Conceitos de IA",
+      "definicao": "Tecnologia que cria conteúdo (texto, áudio, imagens, vídeo) a partir de comandos do usuário, podendo ser funcionalidade principal ou integrada a aplicativos.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "impessoalidade",
+      "termo": "Impessoalidade",
+      "letra": "I",
+      "categoria": "Princípios da administração pública",
+      "definicao": "Princípio da administração pública que garante que decisões tomadas por ou com apoio da IAG sejam objetivas, imparciais e baseadas em critérios legais.",
+      "fonte": "Constituição Federal de 1988, artigo 37 e Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "legalidade",
+      "termo": "Legalidade",
+      "letra": "L",
+      "categoria": "Princípios da administração pública",
+      "definicao": "O uso da IAG deve estar em conformidade com leis e regulamentos aplicáveis e vigentes como a LGPD e normas de direitos autorais.",
+      "fonte": "Constituição Federal de 1988, artigo 37 e Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "medio-risco",
+      "termo": "Médio Risco",
+      "letra": "M",
+      "categoria": "Classificação de risco",
+      "definicao": "Sistemas de IA que interagem com o público ou apoiam decisões com impacto moderado sobre indivíduos, ou grupos. Incluem aplicações que processam dados pessoais não sensíveis, fornecem recomendações para decisões humanas ou operam em contextos onde falhas podem causar inconvenientes significativos, mas não danos irreversíveis.",
+      "fonte": "Algorithmic Impact Assessment do Canadá"
+    },
+    {
+      "id": "persona",
+      "termo": "Persona",
+      "letra": "P",
+      "categoria": "Conceitos de IA",
+      "definicao": "Representação fictícia de um usuário ideal, baseada em dados reais, utilizada para orientar o desenvolvimento e a aplicação de ferramentas de IAG.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "plataformas-externas",
+      "termo": "Plataformas Externas",
+      "letra": "P",
+      "categoria": "Conceitos de IA",
+      "definicao": "Soluções de terceiros acessadas via API, como DeepSeek, ChatGPT e Gemini.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "principios",
+      "termo": "Princípios",
+      "letra": "P",
+      "categoria": "Ética e governança",
+      "definicao": "Os princípios éticos geralmente buscam orientar o desenvolvimento e uso responsável de sistemas de IA. Esses princípios refletem um esforço para equilibrar o avanço tecnológico com preocupações éticas, sociais e legais na implementação da inteligência artificial.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "propriedade-intelectual",
+      "termo": "Propriedade Intelectual",
+      "letra": "P",
+      "categoria": "Proteção de dados",
+      "definicao": "Direitos legais que protegem obras criativas, como textos, imagens e códigos, evitando seu uso não autorizado por sistemas de IAG.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "prompt",
+      "termo": "Prompt",
+      "letra": "P",
+      "categoria": "Conceitos de IA",
+      "definicao": "Comando de texto fornecido a um modelo de IAG para solicitar uma resposta ou realizar uma tarefa.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "racismo-algoritmico",
+      "termo": "Racismo Algorítmico",
+      "letra": "R",
+      "categoria": "Vieses e discriminação",
+      "definicao": "Viés discriminatório reproduzido por sistemas de IAG devido a desigualdades presentes nos dados de treinamento, levando à perpetuação de preconceitos raciais.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "rag-retrieval-augmented-generation",
+      "termo": "RAG (Retrieval-Augmented Generation)",
+      "letra": "R",
+      "categoria": "RAG",
+      "definicao": "Traduzido como \"Geração Aumentada por Recuperação\". É uma arquitetura que conecta a IA a bases de dados externas confiáveis, permitindo que o modelo \"leia\" documentos antes de formular uma resposta.",
+      "fonte": "Guia de Introdução ao RAG no Serviço Público - MGI/SGD"
+    },
+    {
+      "id": "recuperacao-vetorial",
+      "termo": "Recuperação vetorial",
+      "letra": "R",
+      "categoria": "RAG",
+      "definicao": "Processo de consultar um banco de dados de vetores (códigos matemáticos) para encontrar as informações técnicas mais relevantes para uma pergunta.",
+      "fonte": "Guia de Introdução ao RAG no Serviço Público - MGI/SGD"
+    },
+    {
+      "id": "relatorio-de-impacto-a-protecao-de-dados-pessoais-ripd",
+      "termo": "Relatório de Impacto à Proteção de Dados Pessoais (RIPD)",
+      "letra": "R",
+      "categoria": "Proteção de dados",
+      "definicao": "Documentação que contém a descrição dos processos de tratamento de dados pessoais que podem gerar riscos às liberdades civis e aos direitos fundamentais, bem como medidas para mitigá-los.",
+      "fonte": "LEI Nº 13.709/18 - LGPD, art. 5º, XVII"
+    },
+    {
+      "id": "revisao-humana",
+      "termo": "Revisão Humana",
+      "letra": "R",
+      "categoria": "Ética e governança",
+      "definicao": "Processo de validação e supervisão por especialistas para garantir que os conteúdos gerados por IAG sejam precisos, éticos e adequados ao contexto.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "risco-excessivo",
+      "termo": "Risco Excessivo",
+      "letra": "R",
+      "categoria": "Classificação de risco",
+      "definicao": "Sistemas de IA que apresentam potencial de dano inaceitável à sociedade, violando princípios legais ou éticos fundamentais de forma sistemática. Incluem aplicações que manipulam comportamento humano de forma prejudicial, exploram vulnerabilidades de grupos específicos, ou operam com autonomia total em contextos críticos sem supervisão humana adequada. Projetos classificados neste nível devem ser imediatamente suspensos para reavaliação.",
+      "fonte": "AI Act da União Europeia - Artigo 5º"
+    },
+    {
+      "id": "riscos",
+      "termo": "Riscos",
+      "letra": "R",
+      "categoria": "Classificação de risco",
+      "definicao": "Os riscos associados ao uso de IA variam de acordo com a especificidade da aplicação. Uma medida adotada para mitigá-los compreende a classificação dos sistemas de IA em relação ao que pode ou não ser usado na prática, considerando níveis de riscos definidos por parâmetros legais ou normas específicas.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "servicos-essenciais",
+      "termo": "Serviços Essenciais",
+      "letra": "S",
+      "categoria": "Classificação de risco",
+      "definicao": "Serviços públicos ou privados cuja interrupção ou falha pode comprometer gravemente a saúde, segurança, bem-estar ou o funcionamento da sociedade. Exemplos incluem saúde, educação, segurança pública, transporte, energia, saneamento básico e acesso à justiça.",
+      "fonte": "Constituição Federal de 1988 e Lei nº 7.783/1989, artigo 10º"
+    },
+    {
+      "id": "supervisao-humana-significativa",
+      "termo": "Supervisão Humana Significativa",
+      "letra": "S",
+      "categoria": "Ética e governança",
+      "definicao": "Capacidade efetiva e informada de supervisores humanos qualificados de compreender o funcionamento do sistema de IA, monitorar suas decisões em tempo real, intervir quando necessário, e reverter ou modificar resultados antes que causem impacto adverso. Inclui a disponibilidade de informações suficientes para tomada de decisão informada e autoridade real para anular o sistema.",
+      "fonte": "AI Act da União Europeia (Artigo 14º) e OCDE AI Principles"
+    },
+    {
+      "id": "transparencia",
+      "termo": "Transparência",
+      "letra": "T",
+      "categoria": "Ética e governança",
+      "definicao": "O dever de informar claramente quando conteúdo ou decisões são gerados por IAG, permitindo auditoria e contestação, caso necessário.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "transparencia-algoritmica",
+      "termo": "Transparência Algorítmica",
+      "letra": "T",
+      "categoria": "Ética e governança",
+      "definicao": "Princípio que exige que o funcionamento de sistemas algorítmicos seja compreensível e verificável por usuários, especialistas e reguladores.",
+      "fonte": "Recomendações da UNESCO sobre Ética da IA (2021)"
+    },
+    {
+      "id": "vies-algoritmico",
+      "termo": "Viés Algorítmico",
+      "letra": "V",
+      "categoria": "Vieses e discriminação",
+      "definicao": "Tendências nos dados de treinamento, design do modelo ou decisões humanas durante o desenvolvimento que podem induzir a IA generativa a comportamentos indesejáveis e antiéticos.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro - adaptado do termo \"Viés de Modelo\""
+    },
+    {
+      "id": "vies-de-automacao",
+      "termo": "Viés de Automação",
+      "letra": "V",
+      "categoria": "Vieses e discriminação",
+      "definicao": "Tendência de aceitar cegamente as respostas fornecidas por sistemas automatizados, ignorando a análise crítica e o bom senso humano.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "vies-de-exclusao",
+      "termo": "Viés de Exclusão",
+      "letra": "V",
+      "categoria": "Vieses e discriminação",
+      "definicao": "Falha nos modelos de IAG causada pela sub-representação ou ausência de certos grupos nos dados de treinamento, o que resulta em discriminação ou interpretações erradas.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    },
+    {
+      "id": "vies-de-resultado",
+      "termo": "Viés de Resultado",
+      "letra": "V",
+      "categoria": "Vieses e discriminação",
+      "definicao": "Resultado enviesado gerado pela IAG devido a tendências presentes nos dados de treinamento ou nos algoritmos do modelo.",
+      "fonte": null
+    },
+    {
+      "id": "vies-do-modelo",
+      "termo": "Viés do Modelo",
+      "letra": "V",
+      "categoria": "Vieses e discriminação",
+      "definicao": "Tendências nos dados de treinamento, design do modelo ou decisões humanas durante o desenvolvimento que podem induzir a IA generativa a comportamentos indesejáveis e antiéticos.",
+      "fonte": "Cartilha \"IA Generativa no Serviço Público: Glossário de Termos Relacionados à IA\" - MGI/SGD e Serpro"
+    }
+  ]
+}

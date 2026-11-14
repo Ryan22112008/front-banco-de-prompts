@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Check, ChevronDown, Search, X } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
 import { prompts } from '../components/prompts/data'
 import { PromptGrid } from '../components/prompts/PromptGrid'
 
@@ -15,8 +16,10 @@ export default function Home() {
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('Todas')
   const [isCategoryOpen, setIsCategoryOpen] = useState(false)
+  const location = useLocation()
   const categorySelectorRef = useRef<HTMLDivElement>(null)
   const categoryTriggerRef = useRef<HTMLButtonElement>(null)
+  const searchInputRef = useRef<HTMLInputElement>(null)
   const categories = useMemo(() => ['Todas', ...new Set(prompts.map((prompt) => prompt.category))], [])
   const filteredPrompts = useMemo(() => {
     const normalizedQuery = normalize(query)
@@ -31,6 +34,16 @@ export default function Home() {
       return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery))
     })
   }, [activeCategory, query])
+
+  useEffect(() => {
+    if (location.hash !== '#busca') return
+
+    const timer = window.setTimeout(() => {
+      searchInputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      searchInputRef.current?.focus({ preventScroll: true })
+    }, 0)
+    return () => window.clearTimeout(timer)
+  }, [location.hash])
 
   useEffect(() => {
     if (!isCategoryOpen) return
@@ -67,6 +80,7 @@ export default function Home() {
           <label className="sr-only" htmlFor="catalog-search">Pesquisar por prompts, categorias ou tecnologias</label>
           <input
             id="catalog-search"
+            ref={searchInputRef}
             type="search"
             placeholder="Pesquisar por prompts, categorias ou tecnologias..."
             value={query}

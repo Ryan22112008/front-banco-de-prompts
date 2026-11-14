@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom'
 import { BrainCircuit } from 'lucide-react'
 
 const footerLinks = {
-  Navegação: [{ label: 'Início', to: '/' }, { label: 'Prompts', to: '/prompts' }, { label: 'Categorias', to: '/categorias' }, { label: 'Sobre', to: '/sobre' }],
-  Recursos: [{ label: 'Favoritos', to: '/favoritos' }, { label: 'Destaques', to: '/#destaques' }, { label: 'Recentes', to: '/#recentes' }],
+  Navegação: [
+    { label: 'Prompts', to: '/' },
+    { label: 'Glossário de IA', to: '/glossario' },
+    { label: 'Ficha de Sistema de IA', to: '/ficha-sistema-ia' },
+  ],
 }
 
 export function Footer() {
@@ -22,7 +25,7 @@ export function Footer() {
         ))}
         <div className="footer-note"><span className="footer-dot" />Uma ideia melhor começa com<br />uma boa pergunta.</div>
       </div>
-      <div className="footer-bottom"><span>© 2026 Banco de Prompts</span><span>Feito para quem transforma ideias em ação.</span></div>
+      <div className="footer-bottom"><span>© 2026 CEIA.mt</span><span>Feito para quem transforma ideias em ação.</span></div>
     </footer>
   )
 }
