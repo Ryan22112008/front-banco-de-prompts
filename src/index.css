@@ -1996,6 +1996,165 @@ main {
   gap: var(--space-3);
 }
 
+.ficha-groups {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.ficha-groups-toggle {
+  min-height: 40px;
+  margin-left: auto;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-pill);
+  background: var(--canvas-elevated);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast);
+}
+
+.ficha-groups-toggle:hover {
+  border-color: rgb(193 198 255 / 40%);
+  color: var(--neutral-0);
+}
+
+.ficha-group {
+  --group-accent: var(--brand-300);
+  --group-accent-soft: rgb(119 125 244 / 14%);
+  padding: 6px;
+  border: 1px solid var(--border-dark);
+  border-radius: 18px;
+  background: var(--canvas-raised);
+}
+
+.ficha-group[data-group="base"] { --group-accent: #6ee7b7; --group-accent-soft: rgb(110 231 183 / 12%); }
+.ficha-group[data-group="llm"] { --group-accent: #a5a3ff; --group-accent-soft: rgb(165 163 255 / 14%); }
+.ficha-group[data-group="mldl"] { --group-accent: #7cbcff; --group-accent-soft: rgb(124 188 255 / 14%); }
+.ficha-group[data-group="visao"] { --group-accent: #f7bf72; --group-accent-soft: rgb(247 191 114 / 14%); }
+.ficha-group[data-group="biometria"] { --group-accent: #f79ab6; --group-accent-soft: rgb(247 154 182 / 14%); }
+
+.ficha-group-heading {
+  margin: 0;
+}
+
+.ficha-group-trigger {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--duration-fast);
+}
+
+.ficha-group-trigger:hover {
+  background: var(--group-accent-soft);
+}
+
+.ficha-group-copy {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ficha-group-title {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.ficha-group-description {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.ficha-group-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.ficha-group-questions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ficha-group-questions .ficha-tag {
+  min-height: 20px;
+  padding: 2px 8px;
+  border-color: var(--border-dark);
+  background: var(--canvas-elevated);
+  color: var(--text-secondary);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+.ficha-group-stat {
+  white-space: nowrap;
+}
+
+.ficha-group-status {
+  color: var(--group-accent);
+}
+
+.ficha-group[data-status="not-applicable"] .ficha-group-status {
+  color: #f09aa2;
+}
+
+.ficha-group[data-status="pending"] .ficha-group-status {
+  color: #f0c97a;
+}
+
+.ficha-group-count {
+  flex: 0 0 auto;
+  padding: 5px 11px;
+  border: 1px solid var(--group-accent);
+  border-radius: var(--radius-pill);
+  background: var(--group-accent-soft);
+  color: var(--group-accent);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ficha-group-chevron {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--text-muted);
+  transition: transform var(--duration-normal) var(--ease-premium), color var(--duration-fast);
+}
+
+.ficha-group-trigger[aria-expanded="false"] .ficha-group-chevron {
+  transform: rotate(-90deg);
+}
+
+.ficha-group-content {
+  padding: 0 4px 4px;
+}
+
+.ficha-group-content[hidden] {
+  display: none;
+}
+
 .ficha-block {
   border: 1px solid var(--border-card);
   border-radius: var(--radius-card);
@@ -3189,6 +3348,19 @@ main {
     padding: var(--space-3) var(--space-4);
     gap: var(--space-3);
     align-items: flex-start;
+  }
+
+  .ficha-groups-toggle {
+    margin-left: 0;
+  }
+
+  .ficha-group-trigger {
+    padding: var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .ficha-group-count {
+    display: none;
   }
 
   .ficha-block-number {

@@ -33,6 +33,17 @@ export type FichaBlock = {
   fields: FichaField[]
 }
 
+export type FichaGroupId = 'base' | 'llm' | 'mldl' | 'visao' | 'biometria'
+
+export type FichaGroup = {
+  id: FichaGroupId
+  label: string
+  shortLabel: string
+  description: string
+  tags: ApplicabilityTag[]
+  questionIds: QuestionId[]
+}
+
 export const fichaQuestions: FichaQuestion[] = [
   {
     id: 'Q1',
@@ -79,6 +90,57 @@ export const tagToQuestion: Record<Exclude<ApplicabilityTag, 'TODOS'>, QuestionI
   BIOMETRIA: 'Q5',
   TRANSFER: 'Q6',
   DL: 'Q7',
+}
+
+/**
+ * Agrupamentos derivados das sete perguntas de entrada: cada grupo reúne os
+ * blocos cuja tag técnica responde à mesma família de pergunta do questionário.
+ */
+export const fichaGroups: FichaGroup[] = [
+  {
+    id: 'base',
+    label: 'Base comum a qualquer sistema',
+    shortLabel: 'Base comum',
+    description: 'Blocos 1 a 6 — preenchidos por qualquer sistema de IA, independente da tecnologia.',
+    tags: ['TODOS'],
+    questionIds: [],
+  },
+  {
+    id: 'llm',
+    label: 'LLM e recuperação aumentada',
+    shortLabel: 'LLM',
+    description: 'Blocos 7 e 8 — configuração do modelo de linguagem (Q1) e da camada de RAG (Q3).',
+    tags: ['LLM', 'RAG'],
+    questionIds: ['Q1', 'Q3'],
+  },
+  {
+    id: 'mldl',
+    label: 'Machine Learning e Deep Learning',
+    shortLabel: 'ML/DL',
+    description: 'Blocos 9 a 11 — treinamento próprio (Q2), redes profundas (Q7) e modelos pré-treinados com ajuste fino (Q6).',
+    tags: ['ML/DL', 'DL', 'TRANSFER'],
+    questionIds: ['Q2', 'Q7', 'Q6'],
+  },
+  {
+    id: 'visao',
+    label: 'Visão computacional',
+    shortLabel: 'Visão',
+    description: 'Bloco 12 — sistemas que processam imagens ou vídeos (Q4).',
+    tags: ['VISÃO'],
+    questionIds: ['Q4'],
+  },
+  {
+    id: 'biometria',
+    label: 'Processamento biométrico',
+    shortLabel: 'Biometria',
+    description: 'Bloco 13 — sistemas que tratam dados biométricos (Q5).',
+    tags: ['BIOMETRIA'],
+    questionIds: ['Q5'],
+  },
+]
+
+export function groupForTag(tag: ApplicabilityTag): FichaGroup {
+  return fichaGroups.find((group) => group.tags.includes(tag)) ?? fichaGroups[0]
 }
 
 export const fichaBlocks: FichaBlock[] = [

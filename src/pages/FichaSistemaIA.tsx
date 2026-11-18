@@ -1,14 +1,18 @@
 import { useMemo, useState } from 'react'
 import { BookOpen, ListChecks, Search, SearchX, X } from 'lucide-react'
-import { BlocoFicha, type BlockStatus } from '../components/ficha/BlocoFicha'
+import type { BlockStatus } from '../components/ficha/BlocoFicha'
+import { GrupoBlocos, type GroupStatus } from '../components/ficha/GrupoBlocos'
 import { Questionario } from '../components/ficha/Questionario'
 import {
   fichaBlocks,
+  fichaGroups,
   fichaQuestions,
   fichaTotalFields,
+  groupForTag,
   type FichaAnswers,
   type FichaBlock,
   type FichaField,
+  type FichaGroup,
   type QuestionId,
 } from '../components/ficha/fichaSistemaIA'
 
@@ -63,11 +67,20 @@ function formatRange(numbers: number[]) {
   return `${numbers[0]}–${numbers[numbers.length - 1]}`
 }
 
+function resolveGroupStatus(group: FichaGroup, answers: FichaAnswers): GroupStatus {
+  if (group.questionIds.length === 0) return 'always'
+  const values = group.questionIds.map((questionId) => answers[questionId])
+  if (values.some((value) => value === true)) return 'applicable'
+  if (values.every((value) => value === false)) return 'not-applicable'
+  return 'pending'
+}
+
 export default function FichaSistemaIA() {
   const [answers, setAnswers] = useState<FichaAnswers>(emptyAnswers)
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState<FilterId>('todos')
   const [openBlocks, setOpenBlocks] = useState<Set<string>>(() => new Set())
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(() => new Set())
 
   const normalizedQuery = normalize(query)
   const statuses = useMemo(() => {
@@ -97,6 +110,26 @@ export default function FichaSistemaIA() {
     })
   }, [filter, normalizedQuery])
 
+  const groupedBlocks = useMemo(() => {
+    return fichaGroups.flatMap((group) => {
+      const items = visibleBlocks.filter((item) => group.tags.includes(item.block.tag))
+      return items.length > 0 ? [{ group, items }] : []
+    })
+  }, [visibleBlocks])
+
+  const expandGroupsFor = (blockIds: string[]) => {
+    if (!blockIds.length) return
+    setCollapsedGroups((current) => {
+      if (current.size === 0) return current
+      const next = new Set(current)
+      blockIds.forEach((id) => {
+        const block = fichaBlocks.find((item) => item.id === id)
+        if (block) next.delete(groupForTag(block.tag).id)
+      })
+      return next.size === current.size ? current : next
+    })
+  }
+
   const openMatchingBlocks = (value: string, activeFilter: FilterId) => {
     const normalized = normalize(value)
     if (!normalized) return
@@ -106,6 +139,8 @@ export default function FichaSistemaIA() {
         && (blockMatchesQuery(block, normalized) || block.fields.some((field) => fieldMatchesQuery(field, normalized))))
       .map((block) => block.id)
     if (!ids.length) return
+
+    expandGroupsFor(ids)
 
     setOpenBlocks((current) => {
       let changed = false
@@ -164,6 +199,23 @@ export default function FichaSistemaIA() {
     })
   }
 
+  const toggleGroup = (groupId: string) => {
+    setCollapsedGroups((current) => {
+      const next = new Set(current)
+      if (next.has(groupId)) next.delete(groupId)
+      else next.add(groupId)
+      return next
+    })
+  }
+
+  const allGroupsCollapsed = groupedBlocks.every(({ group }) => collapsedGroups.has(group.id))
+
+  const toggleAllGroups = () => {
+    setCollapsedGroups(allGroupsCollapsed
+      ? new Set()
+      : new Set(groupedBlocks.map(({ group }) => group.id)))
+  }
+
   const clearSearchAndFilters = () => {
     setQuery('')
     setFilter('todos')
@@ -209,7 +261,7 @@ export default function FichaSistemaIA() {
             <div>
               <span className="ficha-kicker">Passo 3</span>
               <h2 id="blocos-title">Blocos e campos da ficha</h2>
-              <p>Consulte os 13 blocos, veja quais se aplicam ao seu sistema e explore os campos de cada um.</p>
+              <p>Os 13 blocos estão agrupados pelas famílias de tecnologia do questionário. Veja quais se aplicam ao seu sistema e explore os campos de cada um.</p>
             </div>
             <div className="ficha-search" role="search">
               <Search size={19} strokeWidth={1.8} aria-hidden="true" />
@@ -244,20 +296,31 @@ export default function FichaSistemaIA() {
               ))}
             </div>
             <span className="ficha-result-count" aria-live="polite">
-              {visibleBlocks.length} de {fichaBlocks.length} blocos · {visibleFieldCount} de {fichaTotalFields} campos
+              {visibleBlocks.length} de {fichaBlocks.length} blocos · {groupedBlocks.length} de {fichaGroups.length} grupos · {visibleFieldCount} de {fichaTotalFields} campos
             </span>
+            <button
+              className="ficha-groups-toggle"
+              type="button"
+              onClick={toggleAllGroups}
+              aria-controls="ficha-groups"
+            >
+              {allGroupsCollapsed ? 'Expandir grupos' : 'Recolher grupos'}
+            </button>
           </div>
 
           {visibleBlocks.length ? (
-            <div className="ficha-block-list">
-              {visibleBlocks.map(({ block, fields }) => (
-                <BlocoFicha
-                  key={block.id}
-                  block={block}
-                  fields={fields}
-                  status={statuses.get(block.id) ?? 'always'}
-                  isOpen={openBlocks.has(block.id)}
-                  onToggle={() => toggleBlock(block.id)}
+            <div className="ficha-groups" id="ficha-groups">
+              {groupedBlocks.map(({ group, items }) => (
+                <GrupoBlocos
+                  key={group.id}
+                  group={group}
+                  items={items}
+                  status={resolveGroupStatus(group, answers)}
+                  statuses={statuses}
+                  openBlocks={openBlocks}
+                  isCollapsed={collapsedGroups.has(group.id)}
+                  onToggleGroup={() => toggleGroup(group.id)}
+                  onToggleBlock={toggleBlock}
                 />
               ))}
             </div>
