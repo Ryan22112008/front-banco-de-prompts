@@ -6,6 +6,7 @@ const navigation = [
   { label: 'Prompts', to: '/' },
   { label: 'Glossário de IA', to: '/glossario' },
   { label: 'Ficha de Sistema de IA', to: '/ficha-sistema-ia' },
+  { label: 'Guia de IA Generativa', to: '/guia-ia' },
 ]
 
 function isNavigationActive(to: string, pathname: string) {
